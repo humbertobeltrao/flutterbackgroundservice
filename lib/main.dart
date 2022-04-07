@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void stopServiceInAndroid() async {
-    if(Platform.is) {
+    if(Platform.isAndroid) {
       var method = MethodChannel("com.example.backgroundservice.messages");
       String data = await method.invokeMethod("stopService");
       debugPrint(data);

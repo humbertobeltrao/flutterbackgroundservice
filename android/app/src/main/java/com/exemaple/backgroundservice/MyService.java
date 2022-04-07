@@ -3,6 +3,8 @@ package com.exemaple.backgroundservice;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.IBinder;
@@ -41,11 +43,19 @@ public class MyService extends Service {
                     new NotificationCompat.Builder(this, "messages")
                     .setContentTitle("Flutter background music")
                     .setContentText("Está tocando a música em background")
-                    .setSmallIcon(R.drawable.launch_background);
+                    .setSmallIcon(R.drawable.launch_background)
+                    .setStyle(new NotificationCompat.BigPictureStyle()
+                    .bigPicture(toBitmap(R.drawable.wave)));
+
 
             startForeground(NOTIFICATION_ID, builder.build());
 
         }
+    }
+
+    private Bitmap toBitmap(int image) {
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), image);
+        return largeIcon;
     }
 
     @Override
